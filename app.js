@@ -6,7 +6,6 @@ const firebaseConfig = {
   appId: "1:580728953641:web:9f068f0163fd9113737538"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
@@ -15,18 +14,14 @@ function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
   const message = document.getElementById("message");
 
-  console.log("Google button clicked");
-
   auth.signInWithPopup(provider)
     .then(result => {
       console.log("User logged in:", result.user);
       message.innerText = "Login successful! Redirecting...";
       message.style.color = "green";
 
-      // ✅ Redirect after short delay to make sure Firebase registers the user
-      setTimeout(() => {
-        window.location.href = "username.html";
-      }, 500); // 0.5 seconds
+      // ✅ Redirect to username page
+      window.location.href = "username.html";
     })
     .catch(error => {
       message.innerText = error.message;
@@ -35,11 +30,10 @@ function loginWithGoogle() {
     });
 }
 
-// OPTIONAL: Check if user is already logged in and redirect
+// OPTIONAL: redirect logged-in users automatically
 auth.onAuthStateChanged(user => {
   if (user) {
-    console.log("Already logged in:", user);
-    // Redirect to username page if user is already logged in
+    // Already logged in → go to username page
     window.location.href = "username.html";
   }
 });
