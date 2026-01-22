@@ -23,8 +23,10 @@ function loginWithGoogle() {
       message.innerText = "Login successful! Redirecting...";
       message.style.color = "green";
 
-      // ✅ Redirect to username setup page
-      window.location.href = "username.html";
+      // ✅ Redirect after short delay to make sure Firebase registers the user
+      setTimeout(() => {
+        window.location.href = "username.html";
+      }, 500); // 0.5 seconds
     })
     .catch(error => {
       message.innerText = error.message;
@@ -36,7 +38,8 @@ function loginWithGoogle() {
 // OPTIONAL: Check if user is already logged in and redirect
 auth.onAuthStateChanged(user => {
   if (user) {
-    // Already logged in → go to username page directly
+    console.log("Already logged in:", user);
+    // Redirect to username page if user is already logged in
     window.location.href = "username.html";
   }
 });
