@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login with Google</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <h2>Welcome 👋</h2>
+    <p class="sub">Login with Google to continue</p>
+
+    <button class="google-btn" onclick="loginWithGoogle()">
+      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google Icon">
+      Continue with Google
+    </button>
+
+    <p id="message"></p>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
