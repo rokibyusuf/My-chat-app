@@ -10,15 +10,13 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
-// Make sure user is logged in
+// Redirect to login if not logged in
 auth.onAuthStateChanged(user => {
   if (!user) {
-    // If not logged in, redirect to login
     window.location.href = "index.html";
   }
 });
 
-// Save username to Firestore
 function saveUsername() {
   const username = document.getElementById("username").value.trim();
   const message = document.getElementById("message");
@@ -39,9 +37,9 @@ function saveUsername() {
     message.innerText = "Username saved! 🎉";
     message.style.color = "green";
 
-    // Redirect to chat page later (we'll create this next)
+    // NEXT: redirect to chat page
     setTimeout(() => {
-      alert("Next: Chat page will be ready soon!");
+      alert("Next step: chat page coming soon!");
     }, 1000);
   })
   .catch(error => {
