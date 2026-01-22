@@ -9,31 +9,20 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
-// GOOGLE LOGIN FUNCTION
 function loginWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider();
-  const message = document.getElementById("message");
+  const msg = document.getElementById("message");
 
   auth.signInWithPopup(provider)
-    .then(result => {
-      console.log("User logged in:", result.user);
-      message.innerText = "Login successful! Redirecting...";
-      message.style.color = "green";
-
-      // ✅ Redirect to username page
-      window.location.href = "username.html";
+    .then(() => {
+      msg.innerText = "Login successful 🎉";
+      msg.style.color = "green";
+      setTimeout(() => {
+        window.location.href = "username.html";
+      }, 300);
     })
-    .catch(error => {
-      message.innerText = error.message;
-      message.style.color = "red";
-      console.error("Login error:", error);
+    .catch(err => {
+      msg.innerText = err.message;
+      msg.style.color = "red";
     });
 }
-
-// OPTIONAL: redirect logged-in users automatically
-auth.onAuthStateChanged(user => {
-  if (user) {
-    // Already logged in → go to username page
-    window.location.href = "username.html";
-  }
-});
