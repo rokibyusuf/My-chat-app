@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chat Apps</title>
+  <title>Chat</title>
   <link rel="stylesheet" href="style.css">
 
   <!-- Firebase -->
@@ -12,20 +12,11 @@
 </head>
 <body>
 
-<div class="chat-container">
-  <div class="chat-header">
-    <h2 id="username-display">Hello</h2>
+<div class="container">
+  <div class="card">
+    <h2 id="welcome"></h2>
+    <p>You are now in the chat app 🎉</p>
     <button onclick="logout()">Logout</button>
-  </div>
-
-  <div class="chat-box" id="chat-box"></div>
-
-  <div class="chat-input">
-    <select id="user-select">
-      <option value="" disabled selected>Select user</option>
-    </select>
-    <input type="text" id="message-input" placeholder="Type a message">
-    <button onclick="sendMessage()">Send</button>
   </div>
 </div>
 
