@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
+  <title>My Chat App - Login</title>
   <link rel="stylesheet" href="style.css">
 
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -9,11 +9,22 @@
 </head>
 <body>
 
-  <div class="card">
-    <h2>My Chat App</h2>
-    <button onclick="googleLogin()">Continue with Google</button>
-  </div>
+<div class="card">
+  <h2>My Chat App</h2>
 
-  <script src="app.js"></script>
+  <input id="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+
+  <button onclick="emailSignup()">Sign Up</button>
+  <button onclick="emailLogin()">Login</button>
+
+  <hr>
+
+  <button class="google" onclick="googleLogin()">Continue with Google</button>
+
+  <p id="msg"></p>
+</div>
+
+<script src="auth.js"></script>
 </body>
 </html>
