@@ -6,19 +6,24 @@ const firebaseConfig = {
   appId: "1:580728953641:web:9f068f0163fd9113737538"
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const auth = firebase.auth();
 const db = firebase.firestore();
 
 auth.onAuthStateChanged(user => {
   if (!user) {
     window.location.href = "index.html";
-  } else {
-    db.collection("users").doc(user.uid).get().then(doc => {
+    return;
+  }
+
+  db.collection("users").doc(user.uid).get()
+    .then(doc => {
       document.getElementById("welcome").innerText =
         "Welcome, " + doc.data().username;
     });
-  }
 });
 
 function logout() {
