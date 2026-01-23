@@ -6,22 +6,32 @@ const firebaseConfig = {
   appId: "1:580728953641:web:9f068f0163fd9113737538"
 };
 
-firebase.initializeApp(firebaseConfig);
+// ✅ PREVENT MULTIPLE INITIALIZATION
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// 🔐 CHECK LOGIN STATE
 auth.onAuthStateChanged(user => {
   if (!user) {
     window.location.href = "index.html";
-  } else {
-    db.collection("users").doc(user.uid).get().then(doc => {
-      if (doc.exists) {
+    return;
+  }
+
+  // ✅ CHECK IF USERNAME EXISTS
+  db.collection("users").doc(user.uid).get()
+    .then(doc => {
+      if (doc.exists && doc.data().username) {
+        // 🔥 REDIRECT WORKS HERE
         window.location.href = "chat.html";
       }
     });
-  }
 });
 
+// 💾 SAVE USERNAME
 function saveUsername() {
   const user = auth.currentUser;
   const username = document.getElementById("username").value.trim();
@@ -37,8 +47,13 @@ function saveUsername() {
     uid: user.uid,
     username: username,
     email: user.email
-  }).then(() => {
-    window.location.href = "chat.html";
+  })
+  .then(() => {
+    // ✅ GUARANTEED REDIRECT
+    window.location.replace("chat.html");
+  })
+  .catch(err => {
+    msg.innerText = err.message;
+    msg.style.color = "red";
   });
 }
-
